@@ -1,0 +1,12 @@
+.root {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  justify-content: space-between;
+  row-gap: 20px;
+}
+
+

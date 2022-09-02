@@ -1,0 +1,23 @@
+.item {
+  list-style: none;
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  height: 50px;
+  min-width: 169px;
+ 
+   &__name {
+     font-style: normal;
+     font-weight: 400;
+     font-size: 18px;
+     line-height: 25px;
+     max-width: 115px;
+   }
+ 
+   &__value {
+     font-weight: 700;
+     font-size: 30px;
+     line-height: 41px;
+   }
+ }
+
