@@ -23,7 +23,10 @@ export const SearchLocation = () => {
 
 	const { geoData } = useGetGeocoding({ city: searchValue.value });
 
+	console.log('Geodata [0]: ', geoData?.[0]);
 	useGetWeather({ geoData: geoData?.[0] });
+
+	console.log(options);
 
 	return (
 		<div>

@@ -48,26 +48,18 @@ export const useFetch = <T>({
 			console.error(err);
 		} finally {
 			setIsFetching(false);
-			console.log('end');
 		}
 	};
 
 	useEffect(() => {
-		console.log('depends', depends, checkIsCorrectDepends(), isEnable);
-		console.log(arrayIsEqual(depends, currentDep), isFetching);
-		console.log(depends, currentDep);
-
 		if ((arrayIsEqual(depends, currentDep) && data) || isFetching) return;
 		setCurrentDep([...depends]);
 
 		if (!checkIsCorrectDepends() || isEnable) {
 			setIsFetching(true);
-			console.log('go');
 			handleFetch();
 		}
 	}, depends);
-
-	useEffect(() => console.log('isFe', isFetching), [isFetching]);
 
 	return { data };
 };

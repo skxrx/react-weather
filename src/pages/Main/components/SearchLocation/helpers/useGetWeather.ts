@@ -1,6 +1,6 @@
 import { getWeather } from '../../../../../services/weatherAPI/hands';
 import { useFetch } from '../../../../../services/useFetch';
-import { useWetherContext } from '../../../../../context/wetherContext';
+import { useWeatherContext } from '../../../../../context/weatherContext';
 import { GeocodingResponse } from '../../../../../types';
 
 type Props = {
@@ -8,17 +8,17 @@ type Props = {
 };
 
 export const useGetWeather = ({ geoData }: Props) => {
-	const { handleSetToday } = useWetherContext();
+	const { handleSetToday } = useWeatherContext();
 
 	const { latitude, longitude } = geoData || {};
 
 	const onSuccess = (data: any) => {
+		console.log('data 1: ', data);
 		handleSetToday(data);
 	};
 
 	const enable = !!latitude && !!longitude;
 
-	console.log('enable', enable);
 	const { data } = useFetch({
 		fetch: () => getWeather({ latitude, longitude }),
 		depends: [latitude, longitude],
@@ -26,6 +26,7 @@ export const useGetWeather = ({ geoData }: Props) => {
 		enable,
 	});
 
+	console.log('data 2: ', data);
 	return {
 		weatherData: data,
 	};

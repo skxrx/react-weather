@@ -1,17 +1,17 @@
 import { Today, SearchLocation } from './components';
 
-import { WetherContextProvider } from '../../context/wetherContext';
+import { WeatherContextProvider } from '../../context/weatherContext';
 
 import styles from './index.module.scss';
 
 export const Main = () => {
 	return (
-		<WetherContextProvider>
+		<WeatherContextProvider>
 			<div className={styles.root}>
 				<Today />
 
 				<SearchLocation />
 			</div>
-		</WetherContextProvider>
+		</WeatherContextProvider>
 	);
 };

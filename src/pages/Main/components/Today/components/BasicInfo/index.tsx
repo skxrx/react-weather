@@ -1,11 +1,11 @@
-import { useWetherContext } from '../../../../../../context/wetherContext';
+import { useWeatherContext } from '../../../../../../context/weatherContext';
 
 import styles from './index.module.scss';
 
 export const BasicInfo = () => {
-	const { today } = useWetherContext();
+	const { today } = useWeatherContext();
 
-	console.log(today);
+	console.log('TODAY: ', today);
 
 	return (
 		<div className={styles.main__info}>
