@@ -7,7 +7,7 @@ export const getWeather = async ({
 }: getWeatherPayload) => {
 	try {
 		const data = await WeatherClient.get(
-			`/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m`
+			`/forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,rain_sum,windspeed_10m_max&hourly=windspeed_10m,apparent_temperature,pressure_msl,relativehumidity_2m,precipitation,temperature_2m&timezone=auto`
 		);
 
 		return data.data;

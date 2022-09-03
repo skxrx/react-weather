@@ -1,4 +1,6 @@
+import { useWeatherContext } from '../../../../../../context/weatherContext';
 import { ExtendedInfoItem } from './components';
+import { getTimeIndex } from '../../../../../../services/getTime';
 
 import styles from './index.module.scss';
 
@@ -9,15 +11,33 @@ export interface Item {
 }
 
 export const ExtendedInfo = (props: Props) => {
+	const { today } = useWeatherContext();
+	console.log(today);
+
+	const timeIndex = getTimeIndex(today?.hourly.time);
+	console.log('TimeInfrx: ', timeIndex);
+
 	const items: Item[] = [
 		{
 			name: 'Вероятность осадков',
-			value: '14%',
+			value: 15 + ' %',
 		},
-		{ name: 'Влажность', value: '38%' },
-		{ name: 'Давление', value: '767мм' },
-		{ name: 'Осадки', value: '0 мм' },
-		{ name: 'Ветер', value: '2 м/с, ЮЗ' },
+		{
+			name: 'Влажность',
+			value: Math.floor(today?.hourly.relativehumidity_2m[timeIndex]) + ' %',
+		},
+		{
+			name: 'Давление',
+			value: Math.floor(today?.hourly.pressure_msl[timeIndex]) + ' мм',
+		},
+		{
+			name: 'Осадки',
+			value: Math.floor(today?.hourly.precipitation[timeIndex]) + ' мм',
+		},
+		{
+			name: 'Ветер',
+			value: Math.floor(today?.hourly.windspeed_10m[timeIndex]) + ' м/с',
+		},
 	];
 
 	const getItemKey = (item: Item) => item.name + item.value;

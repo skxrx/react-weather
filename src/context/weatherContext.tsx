@@ -1,8 +1,12 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 
+import { OPTION_DEFAULT_VALUE } from '../consts';
+
 type WeatherContextType = {
-	today: unknown;
+	today: any | unknown;
 	handleSetToday: (newToday: unknown) => void;
+	city: string;
+	handleSetCity: (newCity: string) => void;
 };
 
 const WeatherContext = createContext<WeatherContextType | null>(null);
@@ -18,11 +22,19 @@ export const WeatherContextProvider = ({ children }: Props): JSX.Element => {
 		setToday(newToday);
 	};
 
+	const [city, setCity] = useState<string>(OPTION_DEFAULT_VALUE.value);
+
+	const handleSetCity = (newCity: string) => {
+		setCity(newCity);
+	};
+
 	return (
 		<WeatherContext.Provider
 			value={{
 				today,
 				handleSetToday,
+				city,
+				handleSetCity,
 			}}>
 			{children}
 		</WeatherContext.Provider>

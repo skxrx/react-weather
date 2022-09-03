@@ -1,17 +1,22 @@
+import { DATE_OPTIONS, TIME_OPTIONS } from '../../../../../../consts';
 import { useWeatherContext } from '../../../../../../context/weatherContext';
 
 import styles from './index.module.scss';
 
 export const BasicInfo = () => {
-	const { today } = useWeatherContext();
+	const { today, city } = useWeatherContext();
 
-	console.log('TODAY: ', today);
+	const date = new Date();
 
 	return (
 		<div className={styles.main__info}>
-			<div className={styles.this__location}>Санкт-Петербург</div>
-			<div className={styles.this__info}>Такой-то день сейчас</div>
-			<div className={styles.this__time}>12:42</div>
+			<div className={styles.this__location}>{city || ''}</div>
+			<div className={styles.this__info}>
+				Сегодня, {date.toLocaleString('ru', DATE_OPTIONS)}
+			</div>
+			<div className={styles.this__time}>
+				{date.toLocaleString('ru', TIME_OPTIONS)}
+			</div>
 		</div>
 	);
 };

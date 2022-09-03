@@ -5,16 +5,18 @@ import { GeocodingResponse } from '../../../../../types';
 
 type Props = {
 	geoData?: GeocodingResponse;
+	city: string;
 };
 
-export const useGetWeather = ({ geoData }: Props) => {
-	const { handleSetToday } = useWeatherContext();
+export const useGetWeather = ({ geoData, city }: Props) => {
+	const { handleSetToday, handleSetCity } = useWeatherContext();
 
 	const { latitude, longitude } = geoData || {};
 
 	const onSuccess = (data: any) => {
-		console.log('data 1: ', data);
 		handleSetToday(data);
+
+		handleSetCity(city);
 	};
 
 	const enable = !!latitude && !!longitude;
@@ -26,7 +28,8 @@ export const useGetWeather = ({ geoData }: Props) => {
 		enable,
 	});
 
-	console.log('data 2: ', data);
+	if (data) Object.assign(data, geoData);
+
 	return {
 		weatherData: data,
 	};

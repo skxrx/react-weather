@@ -1,36 +1,25 @@
 import { useState } from 'react';
 import Select from 'react-select/creatable';
 
+import { OPTIONS } from '../../../../consts/index';
+
 import { useGetWeather, useGetGeocoding } from './helpers';
 
-type City = {
-	value: string;
-	label: string;
-};
-
-const options: City[] = [
-	{ value: 'Санкт-Петербург', label: 'Санкт-Петербург' },
-	{ value: 'Москва', label: 'Москва' },
-	{ value: 'Братск', label: 'Братск' },
-];
-
 export const SearchLocation = () => {
-	const [searchValue, setSearchValue] = useState(options[0]);
+	const [searchValue, setSearchValue] = useState(OPTIONS[0]);
+	const city = searchValue.value;
 
 	const handleChange = async (obj: any) => {
 		setSearchValue(obj);
 	};
 
-	const { geoData } = useGetGeocoding({ city: searchValue.value });
+	const { geoData } = useGetGeocoding({ city });
 
-	console.log('Geodata [0]: ', geoData?.[0]);
-	useGetWeather({ geoData: geoData?.[0] });
-
-	console.log(options);
+	useGetWeather({ geoData: geoData?.[0], city });
 
 	return (
 		<div>
-			<Select value={searchValue} options={options} onChange={handleChange} />
+			<Select value={searchValue} options={OPTIONS} onChange={handleChange} />
 			<br></br>
 
 			<span>Selected value: {searchValue.value}</span>
